@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Serviço para a aplicação React.js com Vite
+  react_app:
+    build:
+      context: ./frontend
+    ports:
+      - "${REACT_APP_PORT}:3000"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+
+  # Serviço para o backend Express.js com Sequelize e MySQL
+  express_app:
+    build:
+      context: ./backend
+    ports:
+      - "${EXPRESS_APP_PORT}:3000"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_PORT=${MYSQL_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    # Outras configurações específicas, se necessário
+    # ...
+
+  # Serviço para o banco de dados MySQL
+  mysql_db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "${MYSQL_PORT}:3306"
+
+volumes:
+  mysql_data:
+
