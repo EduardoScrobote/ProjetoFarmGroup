@@ -1,12 +1,15 @@
+import {Routes, Route} from 'react-router-dom'
 
 import InitialPage from './pages/InitialPage/InitialPage'
 
-import './App.css'
+import './App.css';
 function App() {
 
   return (
     <>
-      <InitialPage />
+    <Routes>
+      <Route path='/' element={<InitialPage />}/>
+    </Routes>
     </>
   )
 }
