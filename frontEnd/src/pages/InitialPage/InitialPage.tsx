@@ -1,7 +1,7 @@
 import Sidebar from "../../components/Sidebar/Sidebar";
 function InitialPage() {
     return (
-        <div>
+        <div className="bg-green-600">
             <div className="flex align-between justify-end">
             <Sidebar />
             </div>
