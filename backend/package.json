@@ -1,20 +1,29 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "src/server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "debug": "nodemon --ignore coverage src/server.js",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^37.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "typescript": "*"
+  },
   "dependencies": {
-    "nodemon": "^3.0.1"
-  },
-  "directories": {
-    "test": "tests"
-  },
-  "description": ""
+    "express": "4.18.2",
+    "mysql2": "2.3.0"
+  }
 }

@@ -1,44 +1,49 @@
-version: '3.8'
+version: '3'
 
 services:
-  # Serviço para a aplicação React.js com Vite
-  react_app:
+  # Serviço que irá rodar o node
+  frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile
     ports:
-      - "${REACT_APP_PORT}:3000"
-    environment:
-      - NODE_ENV=${NODE_ENV}
-
-  # Serviço para o backend Express.js com Sequelize e MySQL
-  express_app:
-    build:
-      context: ./backend
-    ports:
-      - "${EXPRESS_APP_PORT}:3000"
-    environment:
-      - NODE_ENV=${NODE_ENV}
-      - MYSQL_HOST=${MYSQL_HOST}
-      - MYSQL_PORT=${MYSQL_PORT}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    # Outras configurações específicas, se necessário
-    # ...
-
-  # Serviço para o banco de dados MySQL
-  mysql_db:
-    image: mysql:5.7
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - "51730:5173"
     volumes:
-      - mysql_data:/var/lib/mysql
-    ports:
-      - "${MYSQL_PORT}:3306"
+      - ./frontend:/app
+    # depends_on:
+    #   - backend
 
-volumes:
-  mysql_data:
+  # backEnd:
+  #   image: node:20-alpine3.17
+  #   container_name: farmGroupBackEnd
+  #   # Mesmo que `docker run -t`
+  #   tty: true
+  #   # Mesmo que `docker run -i`
+  #   stdin_open: true
+  #   command: bash
+  #   restart: always
+  #   working_dir: /home/backend
+  #   volumes:
+  #     - ./backend:/home/backend
+  #   depends_on:
+  #     - database
+  #   ports:
+  #     # Expõe a porta padrão da aplicação: altere aqui caso use outra porta
+  #     - 3001:3001
+  #   environment:
+  #     MYSQL_USER: root
+  #     MYSQL_PASSWORD: password
+  #     MYSQL_PORT: 3306
+  #     MYSQL_HOST: database # Nome do service que será utilizado para o banco de dados
+  #     PORT: 3001
 
+  # database:
+  #   image: mysql:8.0.29
+  #   container_name: farmGroupDB
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #     MYSQL_DATABASE: farmGroupDB
+  #   ports:
+  #     - 33060:3306
+  #   volumes:
+  #     - ./:/docker-entrypoint-initdb.d
