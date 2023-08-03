@@ -1,9 +1,8 @@
-import React from 'react';
-import {Routes, Route} from 'react-router-dom'
-
-import InitialPage from './pages/InitialPage/InitialPage'
-import LoginPage from './pages/LogingPage/LoginPage';
-import RegisterPage from './pages/RegisterPage/RegisterPage';
+// import React from 'react';
+import {Routes, Route} from 'react-router-dom';
+import InitialPage from './pages/InitialPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 import './App.css';
 

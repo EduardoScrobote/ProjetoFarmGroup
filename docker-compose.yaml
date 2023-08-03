@@ -1,49 +1,46 @@
 version: '3'
 
 services:
-  # Serviço que irá rodar o node
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    image: react-with-vite
+    privileged: true
     ports:
       - "51730:5173"
     volumes:
       - ./frontend:/app
-    # depends_on:
-    #   - backend
+    depends_on:
+      - backend
 
-  # backEnd:
-  #   image: node:20-alpine3.17
-  #   container_name: farmGroupBackEnd
-  #   # Mesmo que `docker run -t`
-  #   tty: true
-  #   # Mesmo que `docker run -i`
-  #   stdin_open: true
-  #   command: bash
-  #   restart: always
-  #   working_dir: /home/backend
-  #   volumes:
-  #     - ./backend:/home/backend
-  #   depends_on:
-  #     - database
-  #   ports:
-  #     # Expõe a porta padrão da aplicação: altere aqui caso use outra porta
-  #     - 3001:3001
-  #   environment:
-  #     MYSQL_USER: root
-  #     MYSQL_PASSWORD: password
-  #     MYSQL_PORT: 3306
-  #     MYSQL_HOST: database # Nome do service que será utilizado para o banco de dados
-  #     PORT: 3001
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: express-with-sequelize
+    privileged: true
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - database
+    ports:
+      - 30010:3001
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_PORT: 3306
+      MYSQL_HOST: database
+      PORT: 3001
 
-  # database:
-  #   image: mysql:8.0.29
-  #   container_name: farmGroupDB
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: password
-  #     MYSQL_DATABASE: farmGroupDB
-  #   ports:
-  #     - 33060:3306
-  #   volumes:
-  #     - ./:/docker-entrypoint-initdb.d
+  database:
+    image: mysql:8.0.29
+    container_name: farmGroupDB
+    privileged: true
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: farmGroupDB
+    ports:
+      - 33060:3306
+    volumes:
+      - ./:/docker-entrypoint-initdb.d
