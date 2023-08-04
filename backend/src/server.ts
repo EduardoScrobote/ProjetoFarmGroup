@@ -1,7 +1,7 @@
-// src/server.js
-import app from "./app";
+import app from './app';
 
-// @ts-ignore
-const PORT = process.env.EXPRESS_APP_PORT || 3001;
+const port = process.env.EXPRESS_APP_PORT || 3001;
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(port, () => {
+  console.log(`Tchuplek tchuplim no ratiofly na porta: ${port}`);
+});

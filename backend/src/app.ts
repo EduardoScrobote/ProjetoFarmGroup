@@ -1,7 +1,9 @@
-import express, { Express } from "express";
+import express, { Request, Response } from 'express';
 
-const app: Express = express();
+const app = express();
 
-app.use(express.json());
+app.get('/', (_req: Request, res: Response) => {
+  return res.status(200).json({ message: "Deu bão!" });
+});
 
 export default app;
