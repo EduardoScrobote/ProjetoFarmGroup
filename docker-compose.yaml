@@ -14,7 +14,7 @@ services:
     depends_on:
       - backend
     networks:
-      rede-1
+      - rede-1
 
   backend:
     build:
@@ -35,8 +35,8 @@ services:
       MYSQL_HOST: database
       PORT: 3001
     networks:
-      rede-1
-      rede-2
+      - rede-1
+      - rede-2
 
   database:
     image: mysql:8.0.29
