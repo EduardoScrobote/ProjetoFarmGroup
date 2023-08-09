@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-import Sidebar from '../components/Sidebar/Sidebar';
+import Header from '../components/Sidebar/Header';
 
 function LoginPage() {
   return (
     <div className="bg-[url('../../../public/images/bg-login.jpg')] w-screen h-screen">
       <div className="flex align-between justify-end">
-        <Sidebar />
+        <Header />
       </div>
       <div className="flex justify-center">
         <div className="flex justify-evenly bg-gradient-to-t from-transparent to-sky-300 shadow-black shadow-xl w-1/6 rounded-3xl border border-black h-96 mt-48">
